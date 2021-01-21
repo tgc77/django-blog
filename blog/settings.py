@@ -20,6 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -77,12 +80,12 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog_django',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': ''
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd3c0e4g4prm1io',
+        'HOST': 'ec2-52-54-174-5.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'USER': 'dpvcsyinitnpkm',
+        'PASSWORD': '6f53806109bfa8e6a273011905afe28d40ecad40861e308c7f99d6100bfbf9e2'
     }
 }
 
