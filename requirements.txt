@@ -9,4 +9,3 @@ pytz==2020.5
 sqlparse==0.4.1
 toml==0.10.2
 psycopg2
-gunicorn
