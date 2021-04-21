@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from django.shortcuts import redirect, render
 from django.forms.models import BaseModelForm
 from django.http.response import HttpResponse
@@ -6,6 +7,7 @@ from django.views.generic.edit import UpdateView
 from django.db.models.query import QuerySet
 from django.db.models import Q, Count, Case, When
 from django.contrib import messages
+from django.db import connection
 
 from .models import Post
 from comentarios.forms import FormComentario
@@ -20,6 +22,7 @@ class PostIndex(ListView):
 
     def get_queryset(self) -> QuerySet:
         qs = super().get_queryset()
+        qs = qs.select_related('categoria_post')
         qs = qs.order_by('-id').filter(publicado_post=True)
         qs = qs.annotate(
             numero_comentarios=Count(
@@ -29,6 +32,11 @@ class PostIndex(ListView):
             )
         )
         return qs
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        m_context = super().get_context_data(**kwargs)
+        m_context['connection'] = connection
+        return m_context
 
 
 class PostBusca(PostIndex):
